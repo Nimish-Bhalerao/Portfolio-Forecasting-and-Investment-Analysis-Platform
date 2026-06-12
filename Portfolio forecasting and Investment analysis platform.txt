@@ -1,0 +1,180 @@
+Module 1: Portfolio Management
+
+User can:
+
+Add stock
+Quantity
+Buy Price
+
+Example:
+
+Stock	Qty	Avg Price
+TCS	10	₹3500
+INFY	20	₹1400
+RELIANCE	5	₹2500
+Module 2: Current Portfolio Analytics
+
+Calculate:
+
+Total Investment
+Sum of all investments
+
+Example:
+
+₹1,00,000
+Current Value
+
+Using live API price:
+
+₹1,28,000
+Unrealized Profit
+Current Value - Investment
+Portfolio Return %
+(Current Value - Cost) / Cost
+Module 3: Historical Return Analysis
+
+This is where the project becomes valuable.
+
+1-Year Return
+Price Today vs Price 1 Year Ago
+3-Year CAGR
+
+CAGR = Compound Annual Growth Rate
+
+This is MUCH better than simple return.
+
+Example:
+
+2019 = ₹100
+2024 = ₹200
+
+Not:
+
+100% return
+
+Instead:
+
+14.87% CAGR
+5-Year CAGR
+
+Most important metric.
+
+Investors often compare stocks using:
+
+5Y CAGR
+10-Year CAGR
+
+Module 4:
+Is the stock expensive?
+
+Example:
+
+PE	Meaning
+10	Cheap
+25	Fair
+70	Expensive
+ROE
+
+Return on Equity
+
+Question:
+
+How efficiently does the company use shareholder money?
+
+Good:
+
+ROE > 15%
+Debt-to-Equity Ratio
+
+Question:
+
+How much debt does the company have?
+
+Lower is generally safer.
+
+EPS Growth
+
+Question:
+
+Are profits increasing?
+Revenue Growth
+
+Question:
+
+Is the business growing?
+Module 6: Portfolio Quality Score
+
+This could become your signature feature.
+
+Example Formula:
+
+30% CAGR
+25% ROE
+20% Revenue Growth
+15% Debt
+10% Volatility
+
+Generate:
+
+Portfolio Quality Score = 84/100
+
+Then classify:
+
+90+ Excellent
+75-89 Good
+60-74 Average
+<60 Weak
+Module 7: Future Projection Engine
+
+The most exciting feature.
+
+Suppose:
+
+Investment = ₹1,00,000
+
+Historical CAGR:
+
+14%
+Conservative
+8%
+
+Future Value:
+
+₹2,15,000
+Expected
+14%
+
+Future Value:
+
+₹3,70,000
+Optimistic
+20%
+
+Future Value:
+
+₹6,19,000
+
+
+This feels like a real fintech product.
+
+APIs Needed
+
+You don't need broker APIs.
+
+You need:
+*
+Stock Data
+Yahoo Finance
+Alpha Vantage
+Twelve Data
+
+*
+Fundamental Data
+Financial Modeling Prep
+Alpha Vantage
+
+*
+Tech Stack
+Frontend - React , Bootstrap, Recharts
+Backend - Spring Boot , Spring Security , JDBC , JWT - session 
+Database - MySQL

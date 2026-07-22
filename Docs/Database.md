@@ -13,9 +13,9 @@
 
 ## Holdings 
 
-id
-portfolio_id ( RelationShip one to many || compulsary)
-symbol
-quantity
-buy_price
-purchase_date
+- id
+- portfolio_id ( RelationShip one to many || compulsary)
+- symbol
+- quantity
+- buy_price
+- purchase_date

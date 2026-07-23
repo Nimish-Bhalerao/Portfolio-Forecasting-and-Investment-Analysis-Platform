@@ -3,6 +3,7 @@ package com.portfolioforecasting.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -24,7 +25,7 @@ public class Holding {
 
     private Integer quantity;
 
-    private Double buyPrice;
+    private BigDecimal buyPrice;
 
     private LocalDate purchaseDate;
 

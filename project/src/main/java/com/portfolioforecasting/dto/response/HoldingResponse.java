@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -18,7 +19,6 @@ public class HoldingResponse {
     private String stockSymbol;
     private String companyName;
     private Integer quantity;
-    private Double buyPrice;
+    private BigDecimal buyPrice;
     private LocalDate purchaseDate;
-    private Long portfolioId;
 }

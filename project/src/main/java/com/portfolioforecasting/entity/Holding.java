@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "holdings")
@@ -32,5 +33,11 @@ public class Holding {
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
+
+    @PrePersist
+    public void onCreate() {
+
+        purchaseDate = LocalDate.now();
+    }
 
 }

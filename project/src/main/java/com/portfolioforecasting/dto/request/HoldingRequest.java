@@ -19,6 +19,5 @@ public class HoldingRequest {
     private String companyName;
     private Integer quantity;
     private BigDecimal buyPrice;
-    private LocalDate purchaseDate;
     private Long portfolioId;
 }

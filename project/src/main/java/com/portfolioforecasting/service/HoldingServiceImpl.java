@@ -31,7 +31,6 @@ public class HoldingServiceImpl implements HoldingService {
                 .companyName(request.getCompanyName())
                 .quantity(request.getQuantity())
                 .buyPrice(request.getBuyPrice())
-                .purchaseDate(request.getPurchaseDate())
                 .portfolio(portfolio)
                 .build();
         holding = holdingRepository.save(holding);
@@ -81,7 +80,6 @@ public class HoldingServiceImpl implements HoldingService {
         existingHolding.setCompanyName(holding.getCompanyName());
         existingHolding.setQuantity(holding.getQuantity());
         existingHolding.setBuyPrice(holding.getBuyPrice());
-        existingHolding.setPurchaseDate(holding.getPurchaseDate());
         existingHolding.setPortfolio(portfolioRepository.findById(holding.getPortfolioId())
                 .orElseThrow(() -> new RuntimeException("Portfolio not found by id: " + holding.getPortfolioId())));
         existingHolding = holdingRepository.save(existingHolding);

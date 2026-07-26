@@ -1,4 +1,4 @@
-package com.portfolioforecasting.service;
+package com.portfolioforecasting.service.serviceImpl;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.portfolioforecasting.entity.Portfolio;
 import com.portfolioforecasting.repository.PortfolioRepository;
+import com.portfolioforecasting.service.PortfolioService;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService {

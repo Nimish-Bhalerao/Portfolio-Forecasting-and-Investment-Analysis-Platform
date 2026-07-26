@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.portfolioforecasting.dto.stock.AlphaVantageResponse;
 import com.portfolioforecasting.dto.stock.StockResponse;
 import com.portfolioforecasting.service.MarketDataService;
 

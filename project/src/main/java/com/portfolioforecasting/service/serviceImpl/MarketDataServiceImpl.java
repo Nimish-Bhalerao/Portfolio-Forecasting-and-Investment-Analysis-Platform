@@ -2,39 +2,42 @@ package com.portfolioforecasting.service.serviceImpl;
 
 import java.math.BigDecimal;
 
-import javax.management.RuntimeErrorException;
-
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 
-import com.portfolioforecasting.client.AlphaVantageClient;
-import com.portfolioforecasting.dto.stock.AlphaVantageResponse;
-import com.portfolioforecasting.dto.stock.GlobalQuote;
+import com.portfolioforecasting.client.FinnhubClient;
+import com.portfolioforecasting.dto.stock.FinnhubQuoteResponse;
 import com.portfolioforecasting.dto.stock.StockResponse;
 import com.portfolioforecasting.service.MarketDataService;
 
 @Service
 public class MarketDataServiceImpl implements MarketDataService {
-    private final AlphaVantageClient alphaVantageClient;
+    private final FinnhubClient finnhubClient;
 
-    public MarketDataServiceImpl(AlphaVantageClient alphaVantageClient) {
-        this.alphaVantageClient = alphaVantageClient;
+    public MarketDataServiceImpl(FinnhubClient finnhubClient) {
+        this.finnhubClient = finnhubClient; 
     }
-
+    @Cacheable(value = "stockQuotes", key = "#symbol")
     @Override
-    public StockResponse getStock(String symbol) {
-        AlphaVantageResponse response = alphaVantageClient.getGlobalQuote(symbol);
-        if (response == null || response.getGlobalQuote() == null) {
-            throw new RuntimeException("Stock Data not found for : " + symbol);
-        }
-        GlobalQuote quote = response.getGlobalQuote();
-        return StockResponse.builder()
-                .symbol(quote.getSymbol())
-                .companyName(quote.getSymbol()) // Temporary
-                .currentPrice(new BigDecimal(quote.getPrice()))
-                .build();
+public StockResponse getStock(String symbol) {
 
+    FinnhubQuoteResponse response = finnhubClient.getQuote(symbol);
+
+    if (response == null || response.getC() == null || response.getC().compareTo(BigDecimal.ZERO) == 0) {
+        throw new RuntimeException("Stock Data not found for : " + symbol);
     }
+
+    return StockResponse.builder()
+            .symbol(symbol)
+            .companyName(symbol)      // Temporary
+            .currentPrice(response.getC())
+            .build();
+}
+
+
+
+
+
+
 
 }

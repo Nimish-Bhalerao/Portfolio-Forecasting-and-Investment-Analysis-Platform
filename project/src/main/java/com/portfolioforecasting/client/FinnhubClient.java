@@ -4,32 +4,31 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-import com.portfolioforecasting.dto.stock.AlphaVantageResponse;
+import com.portfolioforecasting.dto.stock.FinnhubQuoteResponse;
 
 @Component
-public class AlphaVantageClient {
+public class FinnhubClient {
 
     private final RestClient restClient;
 
-    @Value("${alpha.vantage.api.key}")
+    @Value("${finnhub.api.key}")
     private String apiKey;
 
-    public AlphaVantageClient(RestClient restClient) {
+    public FinnhubClient(RestClient restClient) {
         this.restClient = restClient;
     }
 
-    public AlphaVantageResponse getGlobalQuote(String symbol) {
+    public FinnhubQuoteResponse getQuote(String symbol) {
 
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("https")
-                        .host("www.alphavantage.co")
-                        .path("/query")
-                        .queryParam("function", "GLOBAL_QUOTE")
+                        .host("finnhub.io")
+                        .path("/api/v1/quote")
                         .queryParam("symbol", symbol)
-                        .queryParam("apikey", apiKey)
+                        .queryParam("token", apiKey)
                         .build())
                 .retrieve()
-                .body(AlphaVantageResponse.class);
+                .body(FinnhubQuoteResponse.class);
     }
 }

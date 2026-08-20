@@ -3,11 +3,16 @@ Portfolio forecasting and Investment analysis
 A web application that can predict the health of portfolio
 
 
-## User Types
+## User 
 
 ### Client
 
 A client is a user who will login into applicaton and update his portfolio.
+- First Name
+- Last Name
+- Email
+- Password (will use hasing and encrypt it later )
+
 
 #### Pages and functionalities:
 
@@ -15,6 +20,7 @@ A client is a user who will login into applicaton and update his portfolio.
 - Jwt for session management
 - Dashboard
  - Bar Graph 
+ - List of shares (can add or remove shares)
  - XIRR : can be calculated using formula
  - CAGR : also same
  - Expected Returns : year wise , month wise , 3 year wise , 5 year wise 

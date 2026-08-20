@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 import com.portfolioforecasting.dto.response.ProfileResponse;
+import com.portfolioforecasting.dto.response.RatiosResponse;
 
 @Component
 public class FmpClient {
@@ -30,5 +31,19 @@ public class FmpClient {
                         .build())
                 .retrieve()
                 .body(ProfileResponse[].class);
+    }
+
+    public RatiosResponse[] getRatios(String symbol) {
+
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("https")
+                        .host("financialmodelingprep.com")
+                        .path("/stable/ratios-ttm")
+                        .queryParam("symbol", symbol)
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .body(RatiosResponse[].class);
     }
 }

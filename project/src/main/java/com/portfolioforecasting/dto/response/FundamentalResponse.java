@@ -1,6 +1,5 @@
 package com.portfolioforecasting.dto.response;
 
-
 import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
@@ -19,12 +18,14 @@ import lombok.Setter;
 public class FundamentalResponse {
 
     private String symbol;
-
     private String companyName;
-
     private String sector;
-
     private String industry;
-
     private BigDecimal marketCap;
+    private BigDecimal peRatio;
+    private BigDecimal roe;
+    private BigDecimal debtToEquity;
+    private BigDecimal currentRatio;
+    private BigDecimal netProfitMargin;
 }
+

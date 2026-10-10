@@ -28,4 +28,3 @@ public class FundamentalResponse {
     private BigDecimal currentRatio;
     private BigDecimal netProfitMargin;
 }
-

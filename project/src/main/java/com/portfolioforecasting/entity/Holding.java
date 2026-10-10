@@ -3,6 +3,8 @@ package com.portfolioforecasting.entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,6 +44,7 @@ public class Holding {
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
+    @JsonIgnoreProperties({"holdings", "hibernateLazyInitializer", "handler"})
     private Portfolio portfolio;
 
     @PrePersist

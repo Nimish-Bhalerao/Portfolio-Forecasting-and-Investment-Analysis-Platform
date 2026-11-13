@@ -1,4 +1,4 @@
-package com.portfolioforecasting;
+package com.portfolioForecasting;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

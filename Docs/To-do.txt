@@ -1,0 +1,131 @@
+1.Currently we are calculating the returns of whole portfolio 
+We can shift to do it for each individual stock and show best performing and worst performing stocks.
+  
+import java.util.*;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+public class q2 {
+
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    static class Sensor {
+        String id;
+
+        // Stores last 5 temperature readings
+        ArrayDeque<Double> temperatures = new ArrayDeque<>();
+
+        // Stores recent timestamps
+        ArrayList<LocalDateTime> times = new ArrayList<>();
+
+        LocalDateTime previousTime = null;
+        double sum = 0;
+
+        Sensor(String id) {
+            this.id = id;
+        }
+
+        void addReading(LocalDateTime time, double temperature) {
+
+            // Maintain only the last 5 temperatures
+            if (temperatures.size() == 5) {
+                sum -= temperatures.removeFirst();
+            }
+
+            temperatures.addLast(temperature);
+            sum += temperature;
+
+            // Check for missed readings
+            if (previousTime != null && time.isAfter(previousTime)) {
+                long gap = ChronoUnit.MINUTES.between(previousTime, time);
+                long missed = gap - 1;
+
+                if (missed > 2) {
+                    System.out.println("Warning: More than 2 readings missed!");
+                }
+            }
+
+            previousTime = time;
+
+            // Keep timestamps within the latest 5-minute window
+            times.add(time);
+
+            LocalDateTime windowStart = time.minusMinutes(4);
+            times.removeIf(t -> t.isBefore(windowStart));
+
+            displayStatus();
+        }
+
+        void displayStatus() {
+            double average = sum / temperatures.size();
+
+            boolean unhealthy = average < 10 || average > 90;
+
+            // Check missing readings in the recent 5-minute window
+            if (!times.isEmpty()) {
+                LocalDateTime first = Collections.min(times);
+                LocalDateTime last = Collections.max(times);
+
+                long expected = ChronoUnit.MINUTES.between(first, last) + 1;
+
+                long received = times.stream().distinct().count();
+
+                if (expected - received > 2) {
+                    unhealthy = true;
+                }
+            }
+
+            System.out.println("Sensor: " + id);
+            System.out.printf("Average: %.2f%n", average);
+            System.out.println("Status: " +
+                    (unhealthy ? "Unhealthy" : "Healthy"));
+            System.out.println("----------------------");
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Create 10 sensors
+        HashMap<String, Sensor> sensors = new HashMap<>();
+
+        for (int i = 1; i <= 10; i++) {
+            String id = "S" + i;
+            sensors.put(id, new Sensor(id));
+        }
+
+        System.out.println(
+                "Enter: SensorID, yyyy-MM-dd HH:mm, Temperature");
+        System.out.println("Type exit to stop.");
+
+        while (true) {
+            String input = sc.nextLine();
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            try {
+                String[] parts = input.split(",");
+
+                String id = parts[0].trim();
+                LocalDateTime time = LocalDateTime.parse(parts[1].trim(), formatter);
+                double temperature = Double.parseDouble(parts[2].trim());
+
+                if (!sensors.containsKey(id)) {
+                    System.out.println("Invalid sensor ID!");
+                    continue;
+                }
+
+                sensors.get(id).addReading(time, temperature);
+
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please try again.");
+            }
+        }
+
+        sc.close();
+    }
+}
